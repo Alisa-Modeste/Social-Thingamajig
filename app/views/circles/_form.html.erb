@@ -1,0 +1,27 @@
+<% action = (@circle.persisted? ? circle_url(@circle.id) : circles_url) %>
+<% method = (@circle.persisted? ? :put : :post) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>Name
+    <input type="text" name="circle[name]" value="<%= @circle.name %>">
+  </label>
+
+  <br>
+
+  <% @users.each do |user| %>
+   <input <%= "checked" if @circle.members.include?(user) %>
+     type="checkbox"
+     name="circle[member_ids][]"
+     value="<%= user.id %>"
+     id="circle_<%= user.id %>"
+      >
+     <%= user.email %><br />
+ <% end %>
+
+  <input type="submit" name="Save">
+
+</form>

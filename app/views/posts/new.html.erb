@@ -1,0 +1,35 @@
+<h1>Create a new post</h1>
+<form action="<%= posts_url %>" method="post">
+  <input type="hidden" name="authenticity_token"
+   value="<%= form_authenticity_token %>" >
+
+ <label>Text
+   <p><textarea rows="4" cols="50" name="post[body]" ></textarea></p></label>
+
+   <label>Link 1
+     <input type="text" name="links[]" >
+   </label>
+
+   <label>Link 2
+     <input type="text" name="links[]" >
+   </label>
+
+   <label>Link 3
+     <input type="text" name="links[]" >
+   </label>
+
+<p>Select Circles to share with</p>
+
+ <% current_user.own_circles.each do |circle| %>
+  <input
+    type="checkbox"
+    name="post[circle_ids][]"
+    value="<%= circle.id %>"
+    id="circle_<%= circle.id %>"
+     >
+    <%= circle.name %><br />
+<% end %>
+
+
+ <input type="submit">
+</form>
