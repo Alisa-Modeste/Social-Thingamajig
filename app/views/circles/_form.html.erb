@@ -11,7 +11,7 @@
   </label>
 
   <br>
-
+  <input type="hidden" name="circle[member_ids][]" value="">
   <% @users.each do |user| %>
    <input <%= "checked" if @circle.members.include?(user) %>
      type="checkbox"
